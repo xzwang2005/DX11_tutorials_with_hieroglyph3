@@ -13,7 +13,18 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-
+*.sdf
+*.suo
+*.filters
+*.dll
+*.lib
+*.exe
+*.obj
+*.tlog
+*.log
+*.pdb
+*.pch
+*.idb
 # =========================
 # Operating System Files
 # =========================
