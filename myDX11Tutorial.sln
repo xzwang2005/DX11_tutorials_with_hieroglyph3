@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaLib", "Hieroglyph3\Depen
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTK_Desktop_2013", "DirectXTK\DirectXTK_Desktop_2013.vcxproj", "{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial3_initialize", "Tutorials\Tutorial3_initialize\Tutorial3_initialize.vcxproj", "{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,12 @@ Global
 		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|Win32.ActiveCfg = Debug|Win32
 		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|Win32.Build.0 = Debug|Win32
 		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|x64.ActiveCfg = Debug|Win32
+		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Debug|Win32.Build.0 = Debug|Win32
+		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Debug|x64.ActiveCfg = Debug|Win32
+		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Release|Win32.ActiveCfg = Debug|Win32
+		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Release|Win32.Build.0 = Debug|Win32
+		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Release|x64.ActiveCfg = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

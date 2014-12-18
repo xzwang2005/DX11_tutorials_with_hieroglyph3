@@ -25,6 +25,7 @@ $RECYCLE.BIN/
 *.pdb
 *.pch
 *.idb
+*.ilk
 # =========================
 # Operating System Files
 # =========================
