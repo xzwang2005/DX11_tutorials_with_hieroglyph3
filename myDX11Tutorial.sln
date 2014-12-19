@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTK_Desktop_2013", "D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial3_initialize", "Tutorials\Tutorial3_initialize\Tutorial3_initialize.vcxproj", "{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial4_shader", "Tutorials\Tutorial4_shader\Tutorial4_shader.vcxproj", "{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -47,6 +49,12 @@ Global
 		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Release|Win32.ActiveCfg = Debug|Win32
 		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Release|Win32.Build.0 = Debug|Win32
 		{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}.Release|x64.ActiveCfg = Debug|Win32
+		{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}.Debug|Win32.Build.0 = Debug|Win32
+		{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}.Debug|x64.ActiveCfg = Debug|Win32
+		{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}.Release|Win32.ActiveCfg = Debug|Win32
+		{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}.Release|Win32.Build.0 = Debug|Win32
+		{82116BFF-9A80-4AB1-B3D5-C1B87CD58C2B}.Release|x64.ActiveCfg = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

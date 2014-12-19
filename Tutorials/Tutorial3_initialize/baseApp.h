@@ -21,7 +21,6 @@ public:
 
 	virtual void TakeScreenShot();
 
-	virtual bool HandleEvent(EventPtr pEvent);
 	virtual std::wstring GetName();
 
 protected:

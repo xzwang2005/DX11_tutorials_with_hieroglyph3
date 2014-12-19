@@ -5,11 +5,6 @@
 
 #include "EventManager.h"
 #include "EvtFrameStart.h"
-#include "EvtChar.h"
-#include "EvtKeyUp.h"
-#include "EvtKeyDown.h"
-
-#include "ScriptManager.h"
 
 #include "SwapChainConfigDX11.h"
 #include "Texture2dConfigDX11.h"
@@ -166,28 +161,6 @@ void App::TakeScreenShot()
 		m_bSaveScreenshot = false;
 		m_pRenderer11->pImmPipeline->SaveTextureScreenShot(0, GetName());
 	}
-}
-//--------------------------------------------------------------------------------
-bool App::HandleEvent(EventPtr pEvent)
-{
-	eEVENT e = pEvent->GetEventType();
-
-	if (e == SYSTEM_KEYBOARD_KEYDOWN)
-	{
-		EvtKeyDownPtr pKeyDown = std::static_pointer_cast<EvtKeyDown>(pEvent);
-
-		unsigned int key = pKeyDown->GetCharacterCode();
-	}
-	else if (e == SYSTEM_KEYBOARD_KEYUP)
-	{
-		EvtKeyUpPtr pKeyUp = std::static_pointer_cast<EvtKeyUp>(pEvent);
-
-		unsigned int key = pKeyUp->GetCharacterCode();
-	}
-
-	// Call the parent class's event handler if we haven't handled the event.
-
-	return(Application::HandleEvent(pEvent));
 }
 //--------------------------------------------------------------------------------
 std::wstring App::GetName()
