@@ -263,6 +263,9 @@ namespace Glyph3
 
 		ID3D11Device* GetDevice();
 
+		int GetSyncInterval() { return m_syncInterval; }
+		int SetSyncInterval(int interval) { m_syncInterval = interval; }
+
 	protected:
 
 		// The main API interfaces used in the renderer.
@@ -352,6 +355,8 @@ namespace Glyph3
 		D3D_FEATURE_LEVEL			m_FeatureLevel;
 
 		std::vector<Task*>			m_vQueuedTasks;
+
+		int							m_syncInterval;
 
 		friend GeometryDX11;
 	};

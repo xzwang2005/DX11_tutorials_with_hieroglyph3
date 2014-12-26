@@ -81,13 +81,13 @@ bool shader_intro::ConfigureEngineComponents()
 
 	// initialize shaders
 	m_Effect.SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
-		std::wstring(L"RotatingCube.hlsl"),
+		std::wstring(L"tutorial04.hlsl"),
 		std::wstring(L"VSMain"),
 		std::wstring(L"vs_4_0"),
 		true));
 
 	m_Effect.SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
-		std::wstring(L"RotatingCube.hlsl"),
+		std::wstring(L"tutorial04.hlsl"),
 		std::wstring(L"PSMain"),
 		std::wstring(L"ps_4_0"),
 		true));
@@ -122,7 +122,7 @@ bool shader_intro::ConfigureEngineComponents()
 	// create vertex buffer layout
 	D3D11_INPUT_ELEMENT_DESC desc[] =
 	{
-		{ "SV_POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 

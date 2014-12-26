@@ -15,7 +15,6 @@ $RECYCLE.BIN/
 *.msp
 *.sdf
 *.suo
-*.filters
 *.dll
 *.lib
 *.exe

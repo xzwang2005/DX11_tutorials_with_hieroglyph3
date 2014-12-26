@@ -7,9 +7,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F2C9EF93-3DB6-4350-9AF8-7A34A0786038}</ProjectGuid>
-    <RootNamespace>Tutorial3_initialize</RootNamespace>
-    <ProjectName>Tutorial_03_initialize</ProjectName>
+    <ProjectGuid>{983E6AD1-8E16-4FD1-9F36-490E6173B9E6}</ProjectGuid>
+    <RootNamespace>Tutorial_05_camera_texture</RootNamespace>
+    <ProjectName>Tutorial_05_scene</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -38,10 +38,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="baseApp.h" />
+    <ClInclude Include="baseScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="baseApp.cpp" />
+    <ClCompile Include="baseScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

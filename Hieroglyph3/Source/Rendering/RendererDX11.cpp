@@ -106,6 +106,7 @@ RendererDX11::RendererDX11()
 
 	m_pParamMgr = 0;
 	pImmPipeline = 0;
+	m_syncInterval = 1;
 
 	// Initialize this to always use MT!
 	MultiThreadingConfig.SetConfiguration( true );
@@ -468,7 +469,7 @@ void RendererDX11::Present( HWND hWnd, int SwapChain )
 
 	if ( index < m_vSwapChains.size() ) {
 		SwapChainDX11* pSwapChain = m_vSwapChains[SwapChain];
-		HRESULT hr = pSwapChain->m_pSwapChain->Present( 0, 0 );
+		HRESULT hr = pSwapChain->m_pSwapChain->Present( m_syncInterval, 0 );
 	}
 	else {
 		Log::Get().Write( L"Tried to present an invalid swap chain index!" );
