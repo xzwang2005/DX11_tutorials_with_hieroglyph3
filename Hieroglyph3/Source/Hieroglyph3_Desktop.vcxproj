@@ -507,27 +507,29 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy Application\*.h ..\SDK\Include
-copy Events\*.h ..\SDK\Include
-copy Mathematics\*.h ..\SDK\Include
-copy Mathematics\*.inl ..\SDK\Include
-copy Scripting\*.h ..\SDK\Include
-copy Utility\*.h ..\SDK\Include
-copy Utility\*.inl ..\SDK\Include
-copy Rendering\*.h ..\SDK\Include
-copy Rendering\*.inl ..\SDK\Include
-copy Geometry\*.h ..\SDK\Include
-copy Intersection\*.h ..\SDK\Include
-copy Objects\*.h ..\SDK\Include
-copy Objects\*.inl ..\SDK\Include
-copy Animation\*.h ..\SDK\Include
-copy Animation\*.inl ..\SDK\Include
+      <Command>MD ..\SDK\Include 
+copy Application\*.h ..\SDK\Include\
+copy Events\*.h ..\SDK\Include\
+copy Mathematics\*.h ..\SDK\Include\
+copy Mathematics\*.inl ..\SDK\Include\
+copy Scripting\*.h ..\SDK\Include\
+copy Utility\*.h ..\SDK\Include\
+copy Utility\*.inl ..\SDK\Include\
+copy Rendering\*.h ..\SDK\Include\
+copy Rendering\*.inl ..\SDK\Include\
+copy Geometry\*.h ..\SDK\Include\
+copy Intersection\*.h ..\SDK\Include\
+copy Objects\*.h ..\SDK\Include\
+copy Objects\*.inl ..\SDK\Include\
+copy Animation\*.h ..\SDK\Include\
+copy Animation\*.inl ..\SDK\Include\
+MD ..\..\Tutorials\bin 
 if "$(Platform)" == "Win32" (
     echo "Hieroglyph3: Copying x86 version of D3DCompile*.dll to output bin folder."
-    copy “$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL” “$(SolutionDir)\Tutorials\bin”
+    copy “$(WindowsSdkDir)redist\d3d\x86\D3DCompile*.DLL” “..\..\Tutorials\bin\”
 ) else (
     echo "Hieroglyph3: Copying x64 version of D3DCompile*.dll to output bin folder."
-    copy “$(WindowsSdkDir)redist\d3d\x64\D3DCompile*.DLL” “$(SolutionDir)\Tutorials\Bin”
+    copy “$(WindowsSdkDir)redist\d3d\x64\D3DCompile*.DLL” “..\..\Tutorials\bin\”
 )</Command>
     </PostBuildEvent>
     <Lib>
@@ -537,6 +539,10 @@ if "$(Platform)" == "Win32" (
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>IF exist ..\SDK\Include (rd ..\SDK\Include) 
+IF exist ..\..\Tutorials\bin (rd ..\..\Tutorials\bin)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <!--<ImportGroup Label="ExtensionTargets">

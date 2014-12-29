@@ -23,7 +23,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial_04_shader", "Tutor
 		{0F6D257E-70D5-46C5-8A12-7BDF93C35E81} = {0F6D257E-70D5-46C5-8A12-7BDF93C35E81}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial_05_camera_scene", "Tutorials\Tutorial_05_camera_texture\Tutorial_05_camera_texture.vcxproj", "{983E6AD1-8E16-4FD1-9F36-490E6173B9E6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial_05_scene", "Tutorials\Tutorial_05_camera_texture\Tutorial_05_camera_texture.vcxproj", "{983E6AD1-8E16-4FD1-9F36-490E6173B9E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F6D257E-70D5-46C5-8A12-7BDF93C35E81} = {0F6D257E-70D5-46C5-8A12-7BDF93C35E81}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
