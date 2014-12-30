@@ -27,7 +27,7 @@ $RECYCLE.BIN/
 *.ilk
 *.ipch
 *.user
-
+*.opensdf
 Hieroglyph3/SDK/
 Tutorials/bin/
 # =========================

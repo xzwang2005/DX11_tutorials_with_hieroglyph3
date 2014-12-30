@@ -40,13 +40,13 @@ public:
 	ResourcePtr				m_pVertexBuffer;
 	int						m_VertexLayout;
 	ResourcePtr				m_pIndexBuffer;
-	RenderEffectDX11		m_Effect;
+	RenderEffectDX11*		m_Effect;
 
 	int						m_iViewPort;
 
 	ViewPerspective*		m_pRenderView;
-	//Actor*					m_pActor;
-	FullscreenActor*		m_pActor;
+	Actor*					m_pActor;
+	//FullscreenActor*		m_pActor;
 	Entity3D*				m_pEntity;
 
 	MaterialPtr				m_pMaterial;

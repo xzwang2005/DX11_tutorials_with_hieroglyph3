@@ -82,13 +82,13 @@ bool shader_intro::ConfigureEngineComponents()
 	// initialize shaders
 	m_Effect.SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
 		std::wstring(L"tutorial04.hlsl"),
-		std::wstring(L"VSMain"),
+		std::wstring(L"VSMAIN"),
 		std::wstring(L"vs_4_0"),
 		true));
 
 	m_Effect.SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
 		std::wstring(L"tutorial04.hlsl"),
-		std::wstring(L"PSMain"),
+		std::wstring(L"PSMAIN"),
 		std::wstring(L"ps_4_0"),
 		true));
 
@@ -172,8 +172,8 @@ void shader_intro::Initialize()
 		Vertex vertices[] =
 		{
 			{ DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f), DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
-			{ DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f), DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
-			{ DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f), DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
+			{ DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f), DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+			{ DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f), DirectX::XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },
 		};
 
 		D3D11_SUBRESOURCE_DATA data;

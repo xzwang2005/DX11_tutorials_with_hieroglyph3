@@ -51,6 +51,8 @@ bool base_scene::ConfigureEngineComponents()
 		return false;
 	}
 
+	m_pRenderer11->MultiThreadingConfig.SetConfiguration(false);
+
 	// create a swap chain
 	SwapChainConfigDX11 Config;
 	Config.SetWidth(m_pWindow->GetWidth());
@@ -77,15 +79,16 @@ bool base_scene::ConfigureEngineComponents()
 	m_pRenderer11->pImmPipeline->ApplyRenderTargets();
 
 	// initialize shaders
-	m_Effect.SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
+	m_Effect = new RenderEffectDX11();
+	m_Effect->SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
 		std::wstring(L"Tutorial04.hlsl"),
-		std::wstring(L"VSMain"),
+		std::wstring(L"VSMAIN"),
 		std::wstring(L"vs_4_0"),
 		true));
 
-	m_Effect.SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
+	m_Effect->SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
 		std::wstring(L"Tutorial04.hlsl"),
-		std::wstring(L"PSMain"),
+		std::wstring(L"PSMAIN"),
 		std::wstring(L"ps_4_0"),
 		true));
 
@@ -111,10 +114,10 @@ bool base_scene::ConfigureEngineComponents()
 		assert(false);
 	}
 
-	m_Effect.m_iBlendState = iBlendState;
-	m_Effect.m_iDepthStencilState = iDepthStencilState;
-	m_Effect.m_iRasterizerState = iRasterizerState;
-	m_Effect.m_uStencilRef = iDepthStencilState;
+	m_Effect->m_iBlendState = iBlendState;
+	m_Effect->m_iDepthStencilState = iDepthStencilState;
+	m_Effect->m_iRasterizerState = iRasterizerState;
+	m_Effect->m_uStencilRef = iDepthStencilState;
 
 	//// create viewport
 	//D3D11_VIEWPORT viewport;
@@ -129,8 +132,6 @@ bool base_scene::ConfigureEngineComponents()
 	//m_pRenderer11->pImmPipeline->RasterizerStage.DesiredState.ViewportCount.SetState(1);
 	//m_pRenderer11->pImmPipeline->RasterizerStage.DesiredState.Viewports.SetState(0, m_iViewPort);
 
-	//bool bCurrentState = m_pRenderer11->MultiThreadingConfig.GetConfiguration();
-	m_pRenderer11->MultiThreadingConfig.SetConfiguration(false);
 	return true;
 }
 
@@ -151,51 +152,66 @@ void base_scene::ShutdownEngineComponents()
 
 void base_scene::Initialize()
 {
-	//// method 1: create a triangle from scratch
-	//// create the geometry (one triangle)
-	//m_pGeometry = GeometryPtr(new GeometryDX11());
-	//if (m_pGeometry == NULL) {
-	//	EventManager::Get()->ProcessEvent(EvtErrorMessagePtr(new EvtErrorMessage(std::wstring(
-	//		L"Attempted to create a triangle on null geometry object."))));
-	//	return;
-	//}
+	// method 1: create a triangle from scratch
+	// create the geometry (one triangle)
+	m_pGeometry = GeometryPtr(new GeometryDX11());
+	if (m_pGeometry == NULL) {
+		EventManager::Get()->ProcessEvent(EvtErrorMessagePtr(new EvtErrorMessage(std::wstring(
+			L"Attempted to create a triangle on null geometry object."))));
+		return;
+	}
 
-	//VertexElementDX11* vPos = new VertexElementDX11(3, 3);		// three-components and three vertex
-	//vPos->m_SemanticName = "POSITION";
-	//vPos->m_uiSemanticIndex = 0;
-	//vPos->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
-	//vPos->m_uiInputSlot = 0;
-	//vPos->m_uiAlignedByteOffset = 0;
-	//vPos->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	//vPos->m_uiInstanceDataStepRate = 0;
+	VertexElementDX11* vPos = new VertexElementDX11(3, 3);		// three-components and three vertex
+	vPos->m_SemanticName = "POSITION";
+	vPos->m_uiSemanticIndex = 0;
+	vPos->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	vPos->m_uiInputSlot = 0;
+	vPos->m_uiAlignedByteOffset = 0;
+	vPos->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	vPos->m_uiInstanceDataStepRate = 0;
 
-	//VertexElementDX11* vCol = new VertexElementDX11(4, 3);
-	//vCol->m_SemanticName = "COLOR";
-	//vCol->m_uiSemanticIndex = 0;
-	//vCol->m_Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	//vCol->m_uiInputSlot = 0;
-	//vCol->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
-	//vCol->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	//vCol->m_uiInstanceDataStepRate = 0;
+	VertexElementDX11* vCol = new VertexElementDX11(4, 3);
+	vCol->m_SemanticName = "COLOR";
+	vCol->m_uiSemanticIndex = 0;
+	vCol->m_Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	vCol->m_uiInputSlot = 0;
+	vCol->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	vCol->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	vCol->m_uiInstanceDataStepRate = 0;
 
-	//Vector3f* pPos = vPos->Get3f(0);
-	//Vector4f* pCol = vCol->Get4f(0);
+	Vector3f* pPos = vPos->Get3f(0);
+	Vector4f* pCol = vCol->Get4f(0);
 
-	//pPos[0] = Vector3f(0.0f, 1.0f, 0.0f);
-	//pPos[1] = Vector3f(-1.0f, -1.0f, 0.0f);
-	//pPos[2] = Vector3f(1.0f, -1.0f, 0.0f);
+	pPos[0] = Vector3f(0.0f, 1.0f, 0.0f);
+	pPos[1] = Vector3f(-1.0f, -1.0f, 0.0f);
+	pPos[2] = Vector3f(1.0f, -1.0f, 0.0f);
 
-	//Vector4f col_green = Vector4f(1.0f, 1.0f, 1.0f, 1.0f);
-	//pCol[0] = pCol[1] = pCol[2] = col_green;
+	//Vector4f col_green = Vector4f(0.0f, 1.0f, 0.0f, 1.0f);
+	pCol[0] = Vector4f(1.0f, 0.0f, 0.0f, 1.0f);
+	pCol[1] = Vector4f(0.0f, 1.0f, 1.0f, 1.0f);
+	pCol[2] = Vector4f(0.0f, 0.0f, 1.0f, 1.0f);
 
-	//TriangleIndices face;
-	//m_pGeometry->AddElement(vPos);
-	//m_pGeometry->AddElement(vCol);
-	//face = TriangleIndices(0, 1, 2);
-	//m_pGeometry->AddFace(face);
+	TriangleIndices face;
+	m_pGeometry->AddElement(vPos);
+	m_pGeometry->AddElement(vCol);
+	face = TriangleIndices(0, 2, 1);
+	m_pGeometry->AddFace(face);
 
-	//m_pGeometry->GenerateInputLayout(m_Effect.GetVertexShader());
-	//m_pGeometry->LoadToBuffers();
+	m_pGeometry->GenerateInputLayout(m_Effect->GetVertexShader());
+	m_pGeometry->LoadToBuffers();
+
+	m_pMaterial = MaterialPtr(new MaterialDX11());
+	m_pMaterial->Params[VT_PERSPECTIVE].bRender = true;
+	m_pMaterial->Params[VT_PERSPECTIVE].pEffect = m_Effect;
+
+	m_pEntity = new Entity3D();
+	m_pEntity->Visual.SetGeometry(m_pGeometry);
+	m_pEntity->Visual.SetMaterial(m_pMaterial);		// must use a pointer here, not a reference
+	m_pEntity->Transform.Position() = Vector3f(0.0f, 0.0f, 0.0f);
+
+	m_pActor = new Actor();
+	m_pActor->GetNode()->AttachChild(m_pEntity);
+	m_pScene->AddActor(m_pActor);
 
 	//// method 2: load an object
 	//m_pGeometry = GeometryLoaderDX11::loadStanfordPlyFile(std::wstring(L"spaceship.ply"));
@@ -215,6 +231,12 @@ void base_scene::Initialize()
 	//m_pActor = new Actor();
 	//m_pActor->GetNode()->AttachChild(m_pEntity);
 
+	////method 3: create a full screen rectangle
+	//m_pActor = new FullscreenActor();
+	//Vector4f green(0.0f, 1.0f, 0.0f, 1.0f);
+	//m_pActor->SetColor(green);
+	//m_pScene->AddActor(m_pActor);
+
 	// create the camera
 	m_pCamera = new Camera();
 	m_pCamera->Spatial().SetTranslation(Vector3f(0.0f, 0.0f, -15.0f));
@@ -223,13 +245,7 @@ void base_scene::Initialize()
 	m_pCamera->SetCameraView(m_pRenderView);
 	m_pCamera->SetProjectionParams(0.1f, 100.0f, 640.0f / 320.0f, static_cast<float>(GLYPH_PI) / 2.0f);
 
-
-	m_pActor = new FullscreenActor();
-	Vector4f green(0.0f, 1.0f, 0.0f, 1.0f);
-	m_pActor->SetColor(green);
-	m_pScene->AddActor(m_pActor);
 	m_pScene->AddCamera(m_pCamera);
-	
 }
 
 void base_scene::Update()
@@ -238,6 +254,7 @@ void base_scene::Update()
 
 	EvtManager.ProcessEvent(EvtFrameStartPtr(new EvtFrameStart(m_pTimer->Elapsed())));
 
+
 	// Update the scene, and then render all cameras within the scene.
 	m_pScene->Update(m_pTimer->Elapsed());
 	m_pScene->Render(m_pRenderer11);
@@ -245,9 +262,6 @@ void base_scene::Update()
 	// Present the results of the rendering to the output window.
 
 	m_pRenderer11->Present(m_pWindow->GetHandle(), m_pWindow->GetSwapChain());
-	//std::wstringstream out;
-	//out << L"updated. frame: " << m_pTimer->FrameCount();
-	//Log::Get().Write(out.str());
 }
 
 void base_scene::Shutdown()
