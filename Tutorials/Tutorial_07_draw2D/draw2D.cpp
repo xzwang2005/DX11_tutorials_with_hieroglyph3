@@ -68,9 +68,6 @@ void draw2D::Update()
 
 void draw2D::Initialize()
 {
-	m_pCamera->Spatial().SetTranslation(Vector3f(0.0f, 0.0f, -5.0f));
-	m_pCamera->SetOrthographicParams(0.1f, 10.0f, 640.0f, 480.0f);
-
 	m_Texture = m_pRenderer11->LoadTexture(L"Outcrop.png");
 
 	m_pEffect = new RenderEffectDX11();
@@ -108,6 +105,7 @@ void draw2D::Initialize()
 	m_pActor->GetBody()->Visual.SetMaterial(pMaterial);
 	m_pScene->AddActor(m_pActor);
 
+	m_pCamera->Spatial().SetTranslation(Vector3f(0.0f, 0.0f, -5.0f));
 	m_pCamera->SetOrthographicParams(0.1f, 10.0f, 1024.0f, 640.0f);
 	m_pRenderView->SetBackColor(Vector4f(0.2f, 0.2f, 0.2f, 0.2f));
 

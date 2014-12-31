@@ -90,7 +90,7 @@ void rotate_box::Initialize()
 	m_pEffect->m_iBlendState = iBlendState;
 	m_pEffect->m_iDepthStencilState = iDepthStencilState;
 	m_pEffect->m_iRasterizerState = iRasterizerState;
-	m_pEffect->m_uStencilRef = iDepthStencilState;
+	//m_pEffect->m_uStencilRef = 1;
 
 	m_pMaterial = MaterialPtr(new MaterialDX11());
 	m_pMaterial->Params[VT_PERSPECTIVE].bRender = true;
