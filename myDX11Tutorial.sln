@@ -33,6 +33,77 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial_06_rotating_box", 
 		{0F6D257E-70D5-46C5-8A12-7BDF93C35E81} = {0F6D257E-70D5-46C5-8A12-7BDF93C35E81}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shaders", "shaders", "{25008C3F-58C7-451F-8034-B02CE9449CDD}"
+	ProjectSection(SolutionItems) = preProject
+		Tutorials\Data\Shaders\AlphaTestTextured.hlsl = Tutorials\Data\Shaders\AlphaTestTextured.hlsl
+		Tutorials\Data\Shaders\AlphaTestTexturedVS.hlsl = Tutorials\Data\Shaders\AlphaTestTexturedVS.hlsl
+		Tutorials\Data\Shaders\AmbientOcclusionCS_16.hlsl = Tutorials\Data\Shaders\AmbientOcclusionCS_16.hlsl
+		Tutorials\Data\Shaders\AmbientOcclusionCS_32.hlsl = Tutorials\Data\Shaders\AmbientOcclusionCS_32.hlsl
+		Tutorials\Data\Shaders\BasicTessellation.hlsl = Tutorials\Data\Shaders\BasicTessellation.hlsl
+		Tutorials\Data\Shaders\BilateralBruteForceCS.hlsl = Tutorials\Data\Shaders\BilateralBruteForceCS.hlsl
+		Tutorials\Data\Shaders\BilateralSeparableCS.hlsl = Tutorials\Data\Shaders\BilateralSeparableCS.hlsl
+		Tutorials\Data\Shaders\CurvedPointNormalTriangles.hlsl = Tutorials\Data\Shaders\CurvedPointNormalTriangles.hlsl
+		Tutorials\Data\Shaders\DepthPS.hlsl = Tutorials\Data\Shaders\DepthPS.hlsl
+		Tutorials\Data\Shaders\DepthVS.hlsl = Tutorials\Data\Shaders\DepthVS.hlsl
+		Tutorials\Data\Shaders\DualParaboloidEnvMapGen.hlsl = Tutorials\Data\Shaders\DualParaboloidEnvMapGen.hlsl
+		Tutorials\Data\Shaders\DualParaboloidEnvMapLookup.hlsl = Tutorials\Data\Shaders\DualParaboloidEnvMapLookup.hlsl
+		Tutorials\Data\Shaders\DualParaboloidEnvMapLookupGen.hlsl = Tutorials\Data\Shaders\DualParaboloidEnvMapLookupGen.hlsl
+		Tutorials\Data\Shaders\FinalPassLP.hlsl = Tutorials\Data\Shaders\FinalPassLP.hlsl
+		Tutorials\Data\Shaders\FinalPS.hlsl = Tutorials\Data\Shaders\FinalPS.hlsl
+		Tutorials\Data\Shaders\FinalVS.hlsl = Tutorials\Data\Shaders\FinalVS.hlsl
+		Tutorials\Data\Shaders\FullscreenColor.hlsl = Tutorials\Data\Shaders\FullscreenColor.hlsl
+		Tutorials\Data\Shaders\GaussianBruteForceCS.hlsl = Tutorials\Data\Shaders\GaussianBruteForceCS.hlsl
+		Tutorials\Data\Shaders\GaussianCachedCS.hlsl = Tutorials\Data\Shaders\GaussianCachedCS.hlsl
+		Tutorials\Data\Shaders\GaussianSeparableCS.hlsl = Tutorials\Data\Shaders\GaussianSeparableCS.hlsl
+		Tutorials\Data\Shaders\GBuffer.hlsl = Tutorials\Data\Shaders\GBuffer.hlsl
+		Tutorials\Data\Shaders\GBufferLP.hlsl = Tutorials\Data\Shaders\GBufferLP.hlsl
+		Tutorials\Data\Shaders\HeightmapVisualization.hlsl = Tutorials\Data\Shaders\HeightmapVisualization.hlsl
+		Tutorials\Data\Shaders\ImageViewerPS.hlsl = Tutorials\Data\Shaders\ImageViewerPS.hlsl
+		Tutorials\Data\Shaders\ImageViewerVS.hlsl = Tutorials\Data\Shaders\ImageViewerVS.hlsl
+		Tutorials\Data\Shaders\ImmediateGeometrySolid.hlsl = Tutorials\Data\Shaders\ImmediateGeometrySolid.hlsl
+		Tutorials\Data\Shaders\ImmediateGeometryTextured.hlsl = Tutorials\Data\Shaders\ImmediateGeometryTextured.hlsl
+		Tutorials\Data\Shaders\InterlockingTerrainTiles.hlsl = Tutorials\Data\Shaders\InterlockingTerrainTiles.hlsl
+		Tutorials\Data\Shaders\InterlockingTerrainTilesComputeShader.hlsl = Tutorials\Data\Shaders\InterlockingTerrainTilesComputeShader.hlsl
+		Tutorials\Data\Shaders\InvertColorCS.hlsl = Tutorials\Data\Shaders\InvertColorCS.hlsl
+		Tutorials\Data\Shaders\KinectBuffersVisualization.hlsl = Tutorials\Data\Shaders\KinectBuffersVisualization.hlsl
+		Tutorials\Data\Shaders\Lights.hlsl = Tutorials\Data\Shaders\Lights.hlsl
+		Tutorials\Data\Shaders\LightsLP.hlsl = Tutorials\Data\Shaders\LightsLP.hlsl
+		Tutorials\Data\Shaders\MaskLP.hlsl = Tutorials\Data\Shaders\MaskLP.hlsl
+		Tutorials\Data\Shaders\MeshSkinnedTessellatedTextured.hlsl = Tutorials\Data\Shaders\MeshSkinnedTessellatedTextured.hlsl
+		Tutorials\Data\Shaders\MeshSkinnedTextured.hlsl = Tutorials\Data\Shaders\MeshSkinnedTextured.hlsl
+		Tutorials\Data\Shaders\MeshStaticTextured.hlsl = Tutorials\Data\Shaders\MeshStaticTextured.hlsl
+		Tutorials\Data\Shaders\ObjectTexturedIntPS.hlsl = Tutorials\Data\Shaders\ObjectTexturedIntPS.hlsl
+		Tutorials\Data\Shaders\ObjectTexturedPS.hlsl = Tutorials\Data\Shaders\ObjectTexturedPS.hlsl
+		Tutorials\Data\Shaders\ObjectTexturedVS.hlsl = Tutorials\Data\Shaders\ObjectTexturedVS.hlsl
+		Tutorials\Data\Shaders\ParticleSystemInsertCS.hlsl = Tutorials\Data\Shaders\ParticleSystemInsertCS.hlsl
+		Tutorials\Data\Shaders\ParticleSystemRender.hlsl = Tutorials\Data\Shaders\ParticleSystemRender.hlsl
+		Tutorials\Data\Shaders\ParticleSystemUpdateCS.hlsl = Tutorials\Data\Shaders\ParticleSystemUpdateCS.hlsl
+		Tutorials\Data\Shaders\PhongShading.hlsl = Tutorials\Data\Shaders\PhongShading.hlsl
+		Tutorials\Data\Shaders\PhongShadingPlanarRefl.hlsl = Tutorials\Data\Shaders\PhongShadingPlanarRefl.hlsl
+		Tutorials\Data\Shaders\RotatingCube.hlsl = Tutorials\Data\Shaders\RotatingCube.hlsl
+		Tutorials\Data\Shaders\SeparableBilateralCS.hlsl = Tutorials\Data\Shaders\SeparableBilateralCS.hlsl
+		Tutorials\Data\Shaders\Skybox.hlsl = Tutorials\Data\Shaders\Skybox.hlsl
+		Tutorials\Data\Shaders\SolidSkinnedShading.hlsl = Tutorials\Data\Shaders\SolidSkinnedShading.hlsl
+		Tutorials\Data\Shaders\SolidSkinnedShading4Bone.hlsl = Tutorials\Data\Shaders\SolidSkinnedShading4Bone.hlsl
+		Tutorials\Data\Shaders\Sprite.hlsl = Tutorials\Data\Shaders\Sprite.hlsl
+		Tutorials\Data\Shaders\TessellationParameters.hlsl = Tutorials\Data\Shaders\TessellationParameters.hlsl
+		Tutorials\Data\Shaders\Textured.hlsl = Tutorials\Data\Shaders\Textured.hlsl
+		Tutorials\Data\Shaders\TexturePS.hlsl = Tutorials\Data\Shaders\TexturePS.hlsl
+		Tutorials\Data\Shaders\TextureVS.hlsl = Tutorials\Data\Shaders\TextureVS.hlsl
+		Tutorials\Data\Shaders\tutorial04.hlsl = Tutorials\Data\Shaders\tutorial04.hlsl
+		Tutorials\Data\Shaders\tutorial06.hlsl = Tutorials\Data\Shaders\tutorial06.hlsl
+		Tutorials\Data\Shaders\tutorial07.hlsl = Tutorials\Data\Shaders\tutorial07.hlsl
+		Tutorials\Data\Shaders\VertexColor.hlsl = Tutorials\Data\Shaders\VertexColor.hlsl
+		Tutorials\Data\Shaders\VertexInstanceColor.hlsl = Tutorials\Data\Shaders\VertexInstanceColor.hlsl
+		Tutorials\Data\Shaders\VolumeGeometry.hlsl = Tutorials\Data\Shaders\VolumeGeometry.hlsl
+		Tutorials\Data\Shaders\WaterSimulation.hlsl = Tutorials\Data\Shaders\WaterSimulation.hlsl
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial_07_draw2D", "Tutorials\Tutorial_07_draw2D\Tutorial_07_draw2D.vcxproj", "{C2CDED29-73F7-4979-8217-2C1D578805E0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F6D257E-70D5-46C5-8A12-7BDF93C35E81} = {0F6D257E-70D5-46C5-8A12-7BDF93C35E81}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -83,6 +154,12 @@ Global
 		{185D551D-F702-4061-B93B-1A79E907DEF6}.Release|Win32.ActiveCfg = Debug|Win32
 		{185D551D-F702-4061-B93B-1A79E907DEF6}.Release|Win32.Build.0 = Debug|Win32
 		{185D551D-F702-4061-B93B-1A79E907DEF6}.Release|x64.ActiveCfg = Debug|Win32
+		{C2CDED29-73F7-4979-8217-2C1D578805E0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C2CDED29-73F7-4979-8217-2C1D578805E0}.Debug|Win32.Build.0 = Debug|Win32
+		{C2CDED29-73F7-4979-8217-2C1D578805E0}.Debug|x64.ActiveCfg = Debug|Win32
+		{C2CDED29-73F7-4979-8217-2C1D578805E0}.Release|Win32.ActiveCfg = Debug|Win32
+		{C2CDED29-73F7-4979-8217-2C1D578805E0}.Release|Win32.Build.0 = Debug|Win32
+		{C2CDED29-73F7-4979-8217-2C1D578805E0}.Release|x64.ActiveCfg = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,7 @@ struct PS_INPUT
     float4 color : COLOR;
 };
 
-PS_INPUT VSMain(VS_INPUT input)
+PS_INPUT VSMAIN(VS_INPUT input)
 {
     PS_INPUT output;
     output.position = float4(input.position, 1.0f);
@@ -20,7 +20,7 @@ PS_INPUT VSMain(VS_INPUT input)
     return output;
 };
 
-float4 PSMain(PS_INPUT input) : SV_Target
+float4 PSMAIN(PS_INPUT input) : SV_Target
 {
     return input.color;
 }

@@ -92,46 +92,32 @@ bool base_scene::ConfigureEngineComponents()
 		std::wstring(L"ps_4_0"),
 		true));
 
-	DepthStencilStateConfigDX11 dsConfig;
-	int iDepthStencilState = m_pRenderer11->CreateDepthStencilState(&dsConfig);
-	if (iDepthStencilState == -1) {
-		Log::Get().Write(L"Failed to create light depth stencil state");
-		assert(false);
-	}
+	//DepthStencilStateConfigDX11 dsConfig;
+	//int iDepthStencilState = m_pRenderer11->CreateDepthStencilState(&dsConfig);
+	//if (iDepthStencilState == -1) {
+	//	Log::Get().Write(L"Failed to create light depth stencil state");
+	//	assert(false);
+	//}
 
-	BlendStateConfigDX11 blendConfig;
-	int iBlendState = m_pRenderer11->CreateBlendState(&blendConfig);
-	if (iBlendState == -1) {
-		Log::Get().Write(L"Failed to create light blend state");
-		assert(false);
-	}
+	//BlendStateConfigDX11 blendConfig;
+	//int iBlendState = m_pRenderer11->CreateBlendState(&blendConfig);
+	//if (iBlendState == -1) {
+	//	Log::Get().Write(L"Failed to create light blend state");
+	//	assert(false);
+	//}
 
-	RasterizerStateConfigDX11 rsConfig;
-	rsConfig.CullMode = D3D11_CULL_BACK;
-	int iRasterizerState = m_pRenderer11->CreateRasterizerState(&rsConfig);
-	if (iRasterizerState == -1) {
-		Log::Get().Write(L"Failed to create rasterizer state");
-		assert(false);
-	}
+	//RasterizerStateConfigDX11 rsConfig;
+	//rsConfig.CullMode = D3D11_CULL_BACK;
+	//int iRasterizerState = m_pRenderer11->CreateRasterizerState(&rsConfig);
+	//if (iRasterizerState == -1) {
+	//	Log::Get().Write(L"Failed to create rasterizer state");
+	//	assert(false);
+	//}
 
-	m_Effect->m_iBlendState = iBlendState;
-	m_Effect->m_iDepthStencilState = iDepthStencilState;
-	m_Effect->m_iRasterizerState = iRasterizerState;
-	m_Effect->m_uStencilRef = iDepthStencilState;
-
-	//// create viewport
-	//D3D11_VIEWPORT viewport;
-	//viewport.Width = static_cast<float>(width);
-	//viewport.Height = static_cast<float>(height);
-	//viewport.MinDepth = 0.0f;
-	//viewport.MaxDepth = 1.0f;
-	//viewport.TopLeftX = 0;
-	//viewport.TopLeftY = 0;
-
-	//m_iViewPort = m_pRenderer11->CreateViewPort(viewport);
-	//m_pRenderer11->pImmPipeline->RasterizerStage.DesiredState.ViewportCount.SetState(1);
-	//m_pRenderer11->pImmPipeline->RasterizerStage.DesiredState.Viewports.SetState(0, m_iViewPort);
-
+	//m_Effect->m_iBlendState = iBlendState;
+	//m_Effect->m_iDepthStencilState = iDepthStencilState;
+	//m_Effect->m_iRasterizerState = iRasterizerState;
+	//m_Effect->m_uStencilRef = iDepthStencilState;
 	return true;
 }
 

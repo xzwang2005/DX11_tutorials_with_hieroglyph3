@@ -92,32 +92,32 @@ bool shader_intro::ConfigureEngineComponents()
 		std::wstring(L"ps_4_0"),
 		true));
 
-	DepthStencilStateConfigDX11 dsConfig;
-	int iDepthStencilState = m_pRenderer11->CreateDepthStencilState(&dsConfig);
-	if (iDepthStencilState == -1) {
-		Log::Get().Write(L"Failed to create light depth stencil state");
-		assert(false);
-	}
+	//DepthStencilStateConfigDX11 dsConfig;
+	//int iDepthStencilState = m_pRenderer11->CreateDepthStencilState(&dsConfig);
+	//if (iDepthStencilState == -1) {
+	//	Log::Get().Write(L"Failed to create light depth stencil state");
+	//	assert(false);
+	//}
 
-	BlendStateConfigDX11 blendConfig;
-	int iBlendState = m_pRenderer11->CreateBlendState(&blendConfig);
-	if (iBlendState == -1) {
-		Log::Get().Write(L"Failed to create light blend state");
-		assert(false);
-	}
+	//BlendStateConfigDX11 blendConfig;
+	//int iBlendState = m_pRenderer11->CreateBlendState(&blendConfig);
+	//if (iBlendState == -1) {
+	//	Log::Get().Write(L"Failed to create light blend state");
+	//	assert(false);
+	//}
 
-	RasterizerStateConfigDX11 rsConfig;
-	rsConfig.CullMode = D3D11_CULL_BACK;
-	int iRasterizerState = m_pRenderer11->CreateRasterizerState(&rsConfig);
-	if (iRasterizerState == -1) {
-		Log::Get().Write(L"Failed to create rasterizer state");
-		assert(false);
-	}
+	//RasterizerStateConfigDX11 rsConfig;
+	//rsConfig.CullMode = D3D11_CULL_BACK;
+	//int iRasterizerState = m_pRenderer11->CreateRasterizerState(&rsConfig);
+	//if (iRasterizerState == -1) {
+	//	Log::Get().Write(L"Failed to create rasterizer state");
+	//	assert(false);
+	//}
 
-	m_Effect.m_iBlendState = iBlendState;
-	m_Effect.m_iDepthStencilState = iDepthStencilState;
-	m_Effect.m_iRasterizerState = iRasterizerState;
-	m_Effect.m_uStencilRef = iDepthStencilState;
+	//m_Effect.m_iBlendState = iBlendState;
+	//m_Effect.m_iDepthStencilState = iDepthStencilState;
+	//m_Effect.m_iRasterizerState = iRasterizerState;
+	//m_Effect.m_uStencilRef = iDepthStencilState;
 
 	// create vertex buffer layout
 	D3D11_INPUT_ELEMENT_DESC desc[] =

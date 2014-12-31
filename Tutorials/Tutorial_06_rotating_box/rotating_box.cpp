@@ -5,6 +5,13 @@
 #include "RotationController.h"
 #include "EvtFrameStart.h"
 
+#include "BufferConfigDX11.h"
+#include "DepthStencilStateConfigDX11.h"
+#include "RasterizerStateConfigDX11.h"
+#include "BlendStateConfigDX11.h"
+#include "SwapChainConfigDX11.h"
+#include "Texture2dConfigDX11.h"
+
 using namespace Glyph3;
 
 rotate_box AppInstance;
@@ -51,12 +58,39 @@ void rotate_box::Initialize()
 	m_pEffect = new RenderEffectDX11();
 	m_pEffect->SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
 		std::wstring(L"tutorial06.hlsl"),
-		std::wstring(L"VSMain"),
+		std::wstring(L"VSMAIN"),
 		std::wstring(L"vs_5_0")));
 	m_pEffect->SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
 		std::wstring(L"tutorial06.hlsl"),
-		std::wstring(L"PSMain"),
+		std::wstring(L"PSMAIN"),
 		std::wstring(L"ps_5_0")));
+
+	DepthStencilStateConfigDX11 dsConfig;
+	int iDepthStencilState = m_pRenderer11->CreateDepthStencilState(&dsConfig);
+	if (iDepthStencilState == -1) {
+		Log::Get().Write(L"Failed to create light depth stencil state");
+		assert(false);
+	}
+
+	BlendStateConfigDX11 blendConfig;
+	int iBlendState = m_pRenderer11->CreateBlendState(&blendConfig);
+	if (iBlendState == -1) {
+		Log::Get().Write(L"Failed to create light blend state");
+		assert(false);
+	}
+
+	RasterizerStateConfigDX11 rsConfig;
+	rsConfig.CullMode = D3D11_CULL_BACK;
+	int iRasterizerState = m_pRenderer11->CreateRasterizerState(&rsConfig);
+	if (iRasterizerState == -1) {
+		Log::Get().Write(L"Failed to create rasterizer state");
+		assert(false);
+	}
+
+	m_pEffect->m_iBlendState = iBlendState;
+	m_pEffect->m_iDepthStencilState = iDepthStencilState;
+	m_pEffect->m_iRasterizerState = iRasterizerState;
+	m_pEffect->m_uStencilRef = iDepthStencilState;
 
 	m_pMaterial = MaterialPtr(new MaterialDX11());
 	m_pMaterial->Params[VT_PERSPECTIVE].bRender = true;
@@ -119,7 +153,7 @@ void rotate_box::Initialize()
 
 	RotationController<Node3D>* pGeometryRotController = new RotationController<Node3D>(Vector3f(0.0f, 1.0f, 0.0f), 0.4f);
 	m_pGeometryActor->GetNode()->Controllers.Attach(pGeometryRotController);
-	//m_pGeometryActor->GetBody()->Visual.SetMaterial(m_pMaterial);
+	m_pGeometryActor->GetBody()->Visual.SetMaterial(m_pMaterial);
 
 	m_pScene->AddActor(m_pGeometryActor);
 }
