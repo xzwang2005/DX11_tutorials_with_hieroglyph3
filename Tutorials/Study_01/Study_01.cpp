@@ -27,13 +27,14 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 	_Module.AddMessageLoop(&theLoop);
 
 	CMainFrame wndMain;
-
-	if(wndMain.CreateEx() == NULL)
+	RECT rc = { 0, 0, 1280, 960 };
+	if(wndMain.CreateEx(NULL, rc) == NULL)
 	{
 		ATLTRACE(_T("Main window creation failed!\n"));
 		return 0;
 	}
 
+	wndMain.CenterWindow();
 	wndMain.ShowWindow(nCmdShow);
 
 	int nRet = theLoop.Run();
@@ -59,7 +60,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 	ATLASSERT(SUCCEEDED(hRes));
 	
 	Gdiplus::GdiplusStartup(&m_gdiplusToken, &m_gdiplusStartupInput, NULL);
-
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int nRet = Run(lpstrCmdLine, nCmdShow);
 
 	Gdiplus::GdiplusShutdown(m_gdiplusToken);

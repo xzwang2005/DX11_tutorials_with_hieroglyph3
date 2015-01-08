@@ -54,7 +54,7 @@ ViewTextOverlay::ViewTextOverlay( RendererDX11& Renderer, ResourcePtr RenderTarg
 	}
 
 	// Create the text rendering classes.
-	m_pSpriteFont = SpriteFontLoaderDX11::LoadFont( std::wstring( L"Consolas" ), 12.0f, 0, false );
+	m_pSpriteFont = SpriteFontLoaderDX11::LoadFont( std::wstring( L"Consolas" ), 20.0f, Gdiplus::FontStyle::FontStyleBold, false );
 	
 	m_pSpriteRenderer = new SpriteRendererDX11();
 	m_pSpriteRenderer->Initialize();

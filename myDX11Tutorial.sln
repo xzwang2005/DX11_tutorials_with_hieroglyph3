@@ -89,7 +89,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shaders", "shaders", "{2500
 		Tutorials\Data\Shaders\TessellationParameters.hlsl = Tutorials\Data\Shaders\TessellationParameters.hlsl
 		Tutorials\Data\Shaders\Textured.hlsl = Tutorials\Data\Shaders\Textured.hlsl
 		Tutorials\Data\Shaders\TexturePS.hlsl = Tutorials\Data\Shaders\TexturePS.hlsl
+		Tutorials\Data\Shaders\TexturePS2.hlsl = Tutorials\Data\Shaders\TexturePS2.hlsl
 		Tutorials\Data\Shaders\TextureVS.hlsl = Tutorials\Data\Shaders\TextureVS.hlsl
+		Tutorials\Data\Shaders\TextureVS2.hlsl = Tutorials\Data\Shaders\TextureVS2.hlsl
 		Tutorials\Data\Shaders\tutorial04.hlsl = Tutorials\Data\Shaders\tutorial04.hlsl
 		Tutorials\Data\Shaders\tutorial06.hlsl = Tutorials\Data\Shaders\tutorial06.hlsl
 		Tutorials\Data\Shaders\tutorial07.hlsl = Tutorials\Data\Shaders\tutorial07.hlsl
@@ -105,6 +107,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial_07_draw2D", "Tutor
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Study_01", "Tutorials\Study_01\Study_01.vcxproj", "{CC9F900A-CA90-41CF-A5E9-2A256342E92C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Study_MFC", "Tutorials\Study_MFC\Study_MFC.vcxproj", "{FB40E8D0-32EE-493C-B345-0D08B238DB24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -168,6 +172,12 @@ Global
 		{CC9F900A-CA90-41CF-A5E9-2A256342E92C}.Release|Win32.ActiveCfg = Debug|Win32
 		{CC9F900A-CA90-41CF-A5E9-2A256342E92C}.Release|Win32.Build.0 = Debug|Win32
 		{CC9F900A-CA90-41CF-A5E9-2A256342E92C}.Release|x64.ActiveCfg = Debug|Win32
+		{FB40E8D0-32EE-493C-B345-0D08B238DB24}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FB40E8D0-32EE-493C-B345-0D08B238DB24}.Debug|Win32.Build.0 = Debug|Win32
+		{FB40E8D0-32EE-493C-B345-0D08B238DB24}.Debug|x64.ActiveCfg = Debug|Win32
+		{FB40E8D0-32EE-493C-B345-0D08B238DB24}.Release|Win32.ActiveCfg = Debug|Win32
+		{FB40E8D0-32EE-493C-B345-0D08B238DB24}.Release|Win32.Build.0 = Debug|Win32
+		{FB40E8D0-32EE-493C-B345-0D08B238DB24}.Release|x64.ActiveCfg = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

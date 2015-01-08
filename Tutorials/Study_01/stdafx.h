@@ -5,6 +5,15 @@
 
 #pragma once
 
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+
+#include <crtdbg.h>
+
+#define DEBUG_NEW new(_NORMAL_BLOCK, THIS_FILE, __LINE__)
+#endif
+
 // Change these values to use different versions
 #define WINVER		0x0500
 #define _WIN32_WINNT	0x0501
@@ -17,6 +26,7 @@
 extern CAppModule _Module;
 
 #include <atlwin.h>
+#include <atldlgs.h>
 
 #if defined _M_IX86
   #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")

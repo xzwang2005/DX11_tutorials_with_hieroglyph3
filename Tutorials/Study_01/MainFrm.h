@@ -3,6 +3,11 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #pragma once
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 class CMainFrame : 
 	public CFrameWindowImpl<CMainFrame>, 
@@ -36,6 +41,7 @@ public:
 		COMMAND_ID_HANDLER(ID_APP_EXIT, OnFileExit)
 		COMMAND_ID_HANDLER(ID_FILE_NEW, OnFileNew)
 		COMMAND_ID_HANDLER(ID_APP_ABOUT, OnAppAbout)
+		COMMAND_ID_HANDLER(ID_OPTIONS_SETTINGS, OnSettings)
 		CHAIN_MSG_MAP(CUpdateUI<CMainFrame>)
 		CHAIN_MSG_MAP(CFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
@@ -55,7 +61,6 @@ public:
 		ATLASSERT(pLoop != NULL);
 		pLoop->AddMessageFilter(this);
 		pLoop->AddIdleHandler(this);
-
 		return 0;
 	}
 
@@ -88,6 +93,11 @@ public:
 	{
 		CAboutDlg dlg;
 		dlg.DoModal();
+		return 0;
+	}
+
+	LRESULT OnSettings(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+	{
 		return 0;
 	}
 };

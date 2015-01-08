@@ -47,6 +47,16 @@ public:
 			origin,
 			&blackBrush);
 
+		Font font2(L"Times New Roman", 14);
+		origin.Y = 30.0f;
+
+		graphics.DrawString(
+			line,
+			12,
+			&font2,
+			origin,
+			&blackBrush);
+
 		return 0;
 	}
 };
