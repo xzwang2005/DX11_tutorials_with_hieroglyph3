@@ -1,4 +1,5 @@
 Texture2D       SampleTexture : register(t0);
+Texture2D		ImageTexture  : register(t1);
 SamplerState    LinearSampler : register(s0);
 
 struct VS_INPUT
@@ -26,5 +27,12 @@ VS_OUTPUT VSMAIN(in VS_INPUT input)
 float4 PSMAIN(in VS_OUTPUT input) : SV_Target
 {
 	float4 vSample = SampleTexture.Sample(LinearSampler, input.tex);
+	return(vSample);
+}
+
+float4 PSFINAL(in VS_OUTPUT input) : SV_Target
+{
+	float4 vSample = ImageTexture.Sample(LinearSampler, input.tex);
+	if (input.tex.x > 0.5) vSample.x = 0.8f;		// make this shader visible in end result
 	return(vSample);
 }

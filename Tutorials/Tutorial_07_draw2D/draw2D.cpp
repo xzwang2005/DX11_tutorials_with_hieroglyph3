@@ -92,7 +92,7 @@ void draw2D::Initialize()
 	m_pFullScreen = GeometryPtr(new GeometryDX11());
 	GeometryGeneratorDX11::GenerateFullScreenQuad(m_pFullScreen);
 
-	m_pFullScreen->GenerateInputLayout(m_pEffect->GetVertexShader());
+	//m_pFullScreen->GenerateInputLayout(m_pEffect->GetVertexShader());
 	m_pFullScreen->LoadToBuffers();
 
 	MaterialPtr pMaterial = MaterialPtr(new MaterialDX11());
