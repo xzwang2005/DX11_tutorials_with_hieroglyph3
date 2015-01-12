@@ -18,6 +18,7 @@ public:
 	virtual void ExecuteTask(PipelineManagerDX11* pPipelineManager, IParameterManager* pParamManager);
 	virtual void Resize(UINT width, UINT height);
 	virtual void SetRenderParams(IParameterManager* pParamManager);
+	virtual void SetUsageParams(IParameterManager* pParamManager);
 
 	virtual void SetEntity(Glyph3::Entity3D* pEntity);
 	virtual void SetScene(Scene* pScene);

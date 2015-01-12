@@ -162,7 +162,7 @@ void TaskApp::Initialize()
 	pMaterial->Params[VT_FINALPASS].pEffect = m_pEffect02;
 
 	// set the texture parameters
-	pMaterial->Parameters.SetShaderResourceParameter(L"InputMap", m_Texture);
+	//pMaterial->Parameters.SetShaderResourceParameter(L"InputMap", m_Texture);
 
 	m_pActor = new Actor();
 	m_pActor->GetBody()->Visual.SetGeometry(m_pFullScreen);

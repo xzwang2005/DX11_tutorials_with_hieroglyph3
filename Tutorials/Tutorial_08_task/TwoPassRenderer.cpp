@@ -18,7 +18,7 @@ TwoPassRenderer::TwoPassRenderer(RendererDX11 & Renderer, ResourcePtr RenderTarg
 	// Create render targets
 	Texture2dConfigDX11 RTConfig;
 	RTConfig.SetColorBuffer(ResolutionX, ResolutionY);
-	RTConfig.SetBindFlags(D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE);
+	RTConfig.SetBindFlags(D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE /*| D3D11_BIND_UNORDERED_ACCESS*/);
 	RTConfig.SetFormat(DXGI_FORMAT_R32G32B32A32_FLOAT);
 	m_firstPassTarget = Renderer.CreateTexture2D(&RTConfig, NULL);
 
@@ -83,8 +83,12 @@ void TwoPassRenderer::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParame
 		// Set this view's render parameters
 		SetRenderParams(pParamManager);
 
+		pPipelineManager->ClearPipelineResources();
+
 		// Run through the graph and render each of the entities
 		m_pScene->GetRoot()->Render(pPipelineManager, pParamManager, VT_FINALPASS);
+
+		//SetUsageParams(pParamManager);
 	}
 }
 
@@ -92,7 +96,13 @@ void TwoPassRenderer::SetRenderParams(IParameterManager* pParamManager)
 {
 	SceneRenderTask::SetRenderParams(pParamManager);
 
-	pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
+	//pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
+	m_pTextureParam->InitializeParameterData(&m_firstPassTarget->m_iResourceSRV);
+}
+
+void TwoPassRenderer::SetUsageParams(IParameterManager* pParamManager)
+{
+	//pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
 }
 
 void TwoPassRenderer::Resize(UINT width, UINT height)

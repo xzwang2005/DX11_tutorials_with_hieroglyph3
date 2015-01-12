@@ -1,6 +1,6 @@
-Texture2D       SampleTexture : register(t0);
-Texture2D		ImageTexture  : register(t0);
-SamplerState    LinearSampler : register(s0);
+Texture2D       SampleTexture;
+Texture2D		ImageTexture;
+SamplerState    LinearSampler;
 
 struct VS_INPUT
 {
