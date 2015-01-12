@@ -21,12 +21,18 @@
     <ClCompile Include="TwoPassRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="firstPassView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaskApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TwoPassRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="firstPassView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "Texture2dConfigDX11.h"
 #include "Entity3D.h"
 #include "Scene.h"
+#include "firstPassView.h"
 
 using namespace Glyph3;
 
@@ -25,11 +26,12 @@ TwoPassRenderer::TwoPassRenderer(RendererDX11 & Renderer, ResourcePtr RenderTarg
 	DepthConfig.SetDepthBuffer(ResolutionX, ResolutionY);
 	m_DepthTarget = Renderer.CreateTexture2D(&DepthConfig, NULL);
 
-	m_pFirstPassView = new ViewPerspective(Renderer, m_firstPassTarget, m_DepthTarget);
+	//m_pFirstPassView = new ViewPerspective(Renderer, m_firstPassTarget, m_DepthTarget);
+	m_pFirstPassView = new FirstPassView(Renderer, m_firstPassTarget, m_DepthTarget);
 	m_pFirstPassView->SetBackColor(Vector4f(0.6f, 0.6f, 0.9f, 1.0f));
 
 	m_pTextureParam = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"ImageTexture"));
-	m_pTextureParam->SetParameterData(&m_firstPassTarget->m_iResourceSRV);
+	//m_pTextureParam->SetParameterData(&m_firstPassTarget->m_iResourceSRV);
 }
 
 
@@ -84,6 +86,13 @@ void TwoPassRenderer::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParame
 		// Run through the graph and render each of the entities
 		m_pScene->GetRoot()->Render(pPipelineManager, pParamManager, VT_FINALPASS);
 	}
+}
+
+void TwoPassRenderer::SetRenderParams(IParameterManager* pParamManager)
+{
+	SceneRenderTask::SetRenderParams(pParamManager);
+
+	pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
 }
 
 void TwoPassRenderer::Resize(UINT width, UINT height)

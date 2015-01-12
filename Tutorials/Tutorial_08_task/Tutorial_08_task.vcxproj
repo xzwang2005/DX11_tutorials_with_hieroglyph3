@@ -37,10 +37,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="firstPassView.cpp" />
     <ClCompile Include="TaskApp.cpp" />
     <ClCompile Include="TwoPassRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="firstPassView.h" />
     <ClInclude Include="TaskApp.h" />
     <ClInclude Include="TwoPassRenderer.h" />
   </ItemGroup>

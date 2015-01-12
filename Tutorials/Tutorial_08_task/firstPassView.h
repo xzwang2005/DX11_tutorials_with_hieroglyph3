@@ -6,17 +6,26 @@ using namespace Glyph3;
 
 class Glyph3::Entity3D;
 
-class firstPassView :
+class FirstPassView :
 	public ViewPerspective
 {
 public:
-	firstPassView(RendererDX11& Renderer, ResourcePtr RenderTarget, ResourcePtr DepthTarget = 0);
-	virtual ~firstPassView();
+	FirstPassView(RendererDX11& Renderer, ResourcePtr RenderTarget, ResourcePtr DepthTarget = 0);
+	virtual ~FirstPassView();
+
+	//virtual void Update(float fTime);
+	//virtual void QueuePreTasks(RendererDX11* pRenderer);
+	//virtual void ExecuteTask(PipelineManagerDX11* pPipelineManager, IParameterManager* pParamManager);
+	//virtual void Resize(UINT width, UINT height);
+
+	virtual void SetEntity(Entity3D* pEntity);
+	virtual void SetScene(Scene* pScene);
 
 	virtual void SetRenderParams(IParameterManager* pParamManager);
 
 	virtual std::wstring GetName();
 
-
+protected:
+	ShaderResourceParameterDX11*			m_pTextureParam;
 };
 

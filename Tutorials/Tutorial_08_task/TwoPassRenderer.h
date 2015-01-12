@@ -17,6 +17,7 @@ public:
 	virtual void QueuePreTasks(RendererDX11* pRenderer);
 	virtual void ExecuteTask(PipelineManagerDX11* pPipelineManager, IParameterManager* pParamManager);
 	virtual void Resize(UINT width, UINT height);
+	virtual void SetRenderParams(IParameterManager* pParamManager);
 
 	virtual void SetEntity(Glyph3::Entity3D* pEntity);
 	virtual void SetScene(Scene* pScene);
@@ -35,5 +36,6 @@ protected:
 
 	ViewPerspective*		m_pFirstPassView;
 	ShaderResourceParameterDX11*	m_pTextureParam;
+	ShaderResourceParameterDX11*	m_pOutputBuffer;
 };
 
