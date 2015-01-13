@@ -84,6 +84,11 @@ void draw2D::Initialize()
 	SamplerStateConfigDX11 SamplerConfig;
 	m_iSample = RendererDX11::Get()->CreateSamplerState(&SamplerConfig);
 
+	// disable depth stencil since we are rendering 2d images
+	DepthStencilStateConfigDX11 ds;
+	ds.DepthEnable = false;
+	m_pEffect->m_iDepthStencilState = RendererDX11::Get()->CreateDepthStencilState(&ds);
+
 	SamplerParameterDX11* pSamplerParameter =
 		RendererDX11::Get()->m_pParamMgr->GetSamplerStateParameterRef(std::wstring(L"LinearSampler"));
 	pSamplerParameter->InitializeParameterData(&m_iSample);

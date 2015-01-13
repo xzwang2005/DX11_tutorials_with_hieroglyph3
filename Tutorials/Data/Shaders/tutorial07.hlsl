@@ -33,6 +33,6 @@ float4 PSMAIN(in VS_OUTPUT input) : SV_Target
 float4 PSFINAL(in VS_OUTPUT input) : SV_Target
 {
 	float4 vSample = ImageTexture.Sample(LinearSampler, input.tex);
-	if (input.tex.x > 0.5) vSample.x = 0.8f;		// make this shader visible in end result
+	if (input.tex.x > 0.5) vSample.xyz = 1.0f - vSample.xyz;		// make this shader visible in end result
 	return(vSample);
 }

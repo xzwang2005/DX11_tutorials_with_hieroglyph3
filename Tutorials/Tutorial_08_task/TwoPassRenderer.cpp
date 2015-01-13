@@ -86,7 +86,6 @@ void TwoPassRenderer::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParame
 		// Run through the graph and render each of the entities
 		m_pScene->GetRoot()->Render(pPipelineManager, pParamManager, VT_FINALPASS);
 
-		//SetUsageParams(pParamManager);
 	}
 }
 
@@ -94,14 +93,14 @@ void TwoPassRenderer::SetRenderParams(IParameterManager* pParamManager)
 {
 	SceneRenderTask::SetRenderParams(pParamManager);
 
-	//pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
-	m_pTextureParam->InitializeParameterData(&m_firstPassTarget->m_iResourceSRV);
+	pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
+	//m_pTextureParam->InitializeParameterData(&m_firstPassTarget->m_iResourceSRV);
 }
 
-void TwoPassRenderer::SetUsageParams(IParameterManager* pParamManager)
-{
-	//pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
-}
+//void TwoPassRenderer::SetUsageParams(IParameterManager* pParamManager)
+//{
+//	//pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
+//}
 
 void TwoPassRenderer::Resize(UINT width, UINT height)
 {
