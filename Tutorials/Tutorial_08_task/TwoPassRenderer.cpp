@@ -70,12 +70,10 @@ void TwoPassRenderer::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParame
 		// Set the render target for the final pass, and clear it
 		pPipelineManager->ClearRenderTargets();
 		pPipelineManager->OutputMergerStage.DesiredState.RenderTargetViews.SetState(0, m_BackBuffer->m_iResourceRTV);
-		pPipelineManager->ApplyRenderTargets();
-		pPipelineManager->ClearBuffers(Vector4f(0.0f, 0.0f, 0.0f, 0.0f));
-
-		// Also bind the depth buffer
 		pPipelineManager->OutputMergerStage.DesiredState.DepthTargetViews.SetState(m_DepthTarget->m_iResourceDSV);
 		pPipelineManager->ApplyRenderTargets();
+
+		pPipelineManager->ClearBuffers(Vector4f(0.0f, 0.0f, 0.0f, 0.0f));
 
 		// Configure the desired viewports in this pipeline
 		ConfigureViewports(pPipelineManager);

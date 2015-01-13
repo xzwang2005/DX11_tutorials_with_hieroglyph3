@@ -18,11 +18,11 @@ public:
 	virtual void ExecuteTask(PipelineManagerDX11* pPipelineManager, IParameterManager* pParamManager);
 	//virtual void Resize(UINT width, UINT height);
 
-	virtual void SetEntity(Entity3D* pEntity);
-	virtual void SetScene(Scene* pScene);
+	//virtual void SetEntity(Entity3D* pEntity);
+	//virtual void SetScene(Scene* pScene);
 
-	virtual void SetRenderParams(IParameterManager* pParamManager);
-	virtual void SetUsageParams(IParameterManager* pParamManager);
+	//virtual void SetRenderParams(IParameterManager* pParamManager);
+	//virtual void SetUsageParams(IParameterManager* pParamManager);
 	virtual std::wstring GetName();
 
 protected:
