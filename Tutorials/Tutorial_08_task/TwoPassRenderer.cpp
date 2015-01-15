@@ -18,7 +18,7 @@ TwoPassRenderer::TwoPassRenderer(RendererDX11 & Renderer, ResourcePtr RenderTarg
 	// Create render targets
 	Texture2dConfigDX11 RTConfig;
 	RTConfig.SetColorBuffer(ResolutionX, ResolutionY);
-	RTConfig.SetBindFlags(D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE /*| D3D11_BIND_UNORDERED_ACCESS*/);
+	RTConfig.SetBindFlags(D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE);
 	RTConfig.SetFormat(DXGI_FORMAT_R32G32B32A32_FLOAT);
 	m_firstPassTarget = Renderer.CreateTexture2D(&RTConfig, NULL);
 

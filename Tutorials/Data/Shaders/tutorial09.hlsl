@@ -3,6 +3,7 @@ Texture2D		RedTexture : register(t1);
 Texture2D		GreenTexture : register(t2);
 Texture2D		BlueTexture : register(t3);
 Texture2D		AllColorTexture : register(t4);
+Texture2D		FinalTexture : register(t5);
 SamplerState    LinearSampler;
 
 struct VS_INPUT
@@ -19,10 +20,10 @@ struct VS_OUTPUT
 
 struct PSOutput
 {
-	float4 RedOutput			: SV_Target1;
-	float4 GreenOutput			: SV_Target2;
-	float4 BlueOutput			: SV_Target3;
-	float4 AllColOutput			: SV_Target4;
+	float4 RedOutput			: SV_Target0;
+	float4 GreenOutput			: SV_Target1;
+	float4 BlueOutput			: SV_Target2;
+	float4 AllColOutput			: SV_Target3;
 };
 
 VS_OUTPUT VSMAIN(in VS_INPUT input)
@@ -45,16 +46,10 @@ PSOutput PSMAIN(in VS_OUTPUT input)
 	output.BlueOutput = vSample;
 	output.BlueOutput.b = 1.0f - output.BlueOutput.b;
 	output.AllColOutput = vSample;
-
-	//output.RedOutput = float4(1.0f, 0.0f, 0.0f, 1.0f);
-	//output.GreenOutput = float4(0.0f, 1.0f, 0.0f, 1.0f);
-	//output.BlueOutput = float4(0.0f, 0.0f, 1.0f, 1.0f);
-	//output.AllColOutput = vSample;
-
 	return output;
 }
 
-float4 PSFINAL(in VS_OUTPUT input) : SV_Target5
+float4 PSFINAL(in VS_OUTPUT input) : SV_Target0
 {
 	float4 red = RedTexture.Sample(LinearSampler, input.tex);
 	float4 green = GreenTexture.Sample(LinearSampler, input.tex);

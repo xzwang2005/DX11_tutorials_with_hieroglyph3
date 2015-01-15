@@ -24,8 +24,8 @@ public:
 	{
 		static const std::wstring Names[NumSettings] =
 		{
-			L"FirstPass targets",
-			L"FinalPass target"
+			L"FirstPass",
+			L"FinalPass"
 		};
 
 		std::wstring text = L"Disaply Mode(D): ";

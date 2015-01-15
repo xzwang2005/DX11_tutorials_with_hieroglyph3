@@ -17,6 +17,7 @@ mrtSecondPassRenderer::mrtSecondPassRenderer(RendererDX11& Renderer)
 	m_pColTexParams[0] = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"RedTexture"));
 	m_pColTexParams[1] = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"GreenTexture"));
 	m_pColTexParams[2] = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"BlueTexture"));
+	m_pColTexParams[3] = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"AllColorTexture"));
 }
 
 void mrtSecondPassRenderer::Update(float fTime){};
@@ -74,7 +75,7 @@ void mrtSecondPassRenderer::SetRenderParams(IParameterManager* pParamManager)
 	pParamManager->SetViewMatrixParameter(&ViewMatrix);
 	pParamManager->SetProjMatrixParameter(&ProjMatrix);
 
-	for (UINT i = 0; i < m_colTex.size() - 1; ++i)		// don't need to bind the last buffer
+	for (UINT i = 0; i < m_colTex.size(); ++i)	
 		pParamManager->SetShaderResourceParameter(m_pColTexParams[i], m_colTex[i]);
 }
 

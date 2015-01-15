@@ -102,8 +102,6 @@ void mrtRenderer::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParameterM
 	// Configure the desired viewports in this pipeline
 	ConfigureViewports(pPipelineManager);
 
-	//float scaleFactor = DisplayMode::Value == DisplayMode::FinalPass ? 1.0f : 0.5f;
-
 	if (DisplayMode::Value == DisplayMode::FinalPass) {
 		m_SpriteRenderer.Render(pPipelineManager, pParamManager, m_secondPassTarget, Matrix4f::ScaleMatrix(1.0f));
 	}
@@ -144,15 +142,25 @@ void mrtRenderer::SetupViews()
 
 void mrtRenderer::Resize(UINT width, UINT height)
 {
+	RendererDX11* pRenderer = RendererDX11::Get();
 
+	// Remember the new dimensions of the render view.
+	ResolutionX = width;
+	ResolutionY = height;
+
+	for (UINT i = 0; i < m_firstPassTargets.size(); ++i)
+	{
+		pRenderer->ResizeTexture(m_firstPassTargets[i], ResolutionX, ResolutionY);
+	}
+	pRenderer->ResizeTexture(m_secondPassTarget, ResolutionX, ResolutionY);
+	pRenderer->ResizeTexture(m_DepthTarget, ResolutionX, ResolutionY);
+
+	pRenderer->ResizeViewport(m_iViewport, ResolutionX, ResolutionY);
+	m_pFirstPassRenderer->Resize(width, height);
+	m_pSecondPassRenderer->Resize(width, height);
 }
 
 std::wstring mrtRenderer::GetName()
 {
 	return(L"mrtRenderer");
 }
-
-//void mrtRenderer::SetRenderParams(IParameterManager* pParamManager)
-//{
-//
-//}

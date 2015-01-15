@@ -31,6 +31,6 @@ protected:
 	Glyph3::RendererDX11&			m_Renderer;
 	ResourcePtr						m_RenderTarget;
 	ResourcePtr						m_DepthTarget;
-	ShaderResourceParameterDX11*	m_pColTexParams[3];
+	ShaderResourceParameterDX11*	m_pColTexParams[4];
 	std::vector<ResourcePtr>		m_colTex;
 };

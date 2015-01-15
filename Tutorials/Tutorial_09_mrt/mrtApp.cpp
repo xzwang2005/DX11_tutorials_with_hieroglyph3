@@ -123,11 +123,11 @@ void mrtApp::Update()
 	// in later examples for using the material system with render views.
 
 	EvtManager.ProcessEvent(EvtFrameStartPtr(new EvtFrameStart(m_pTimer->Elapsed())));
+	DrawHUD();
 
 	// Update the scene, and then render all cameras within the scene.
 	m_pScene->Update(m_pTimer->Elapsed());
 	m_pScene->Render(m_pRenderer11);
-
 
 	// Perform the rendering and presentation for the window.
 	m_pRenderer11->Present(m_pWindow->GetHandle(), m_pWindow->GetSwapChain());
@@ -182,4 +182,12 @@ void mrtApp::Initialize()
 	m_pActor->GetBody()->Visual.SetMaterial(pMaterial);
 	m_pScene->AddActor(m_pActor);
 
+}
+
+void mrtApp::DrawHUD()
+{
+	Matrix4f transform = Matrix4f::Identity();
+	transform.SetTranslation(Vector3f(10.0f, 10.0f, 0.0f));
+	std::wstring text = DisplayMode::ToString();
+	m_pTextOverlayView->WriteText(text, transform, Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
 }

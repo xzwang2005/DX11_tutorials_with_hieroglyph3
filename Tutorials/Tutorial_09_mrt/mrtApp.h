@@ -26,6 +26,8 @@ public:
 	//virtual bool HandleEvent(EventPtr pEvent);
 	virtual std::wstring GetName();
 
+	void DrawHUD();
+
 protected:
 	RenderEffectDX11*		m_pEffect;
 	RenderEffectDX11*		m_pFinalEffect;
