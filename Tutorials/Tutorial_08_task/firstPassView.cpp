@@ -12,8 +12,8 @@ FirstPassView::~FirstPassView()
 
 void FirstPassView::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParameterManager* pParamManager)
 {
-	// unbind the shader resource view
-	pPipelineManager->ClearPipelineState();
+	// unbind the shader resource view, it is not necessary if the renderer is running in multithreading mode (default)
+	//pPipelineManager->ClearPipelineState();
 	ViewPerspective::ExecuteTask(pPipelineManager, pParamManager);
 }
 

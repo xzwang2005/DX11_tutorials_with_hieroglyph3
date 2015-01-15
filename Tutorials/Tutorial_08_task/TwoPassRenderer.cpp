@@ -31,7 +31,8 @@ TwoPassRenderer::TwoPassRenderer(RendererDX11 & Renderer, ResourcePtr RenderTarg
 	m_pFirstPassView->SetBackColor(Vector4f(0.6f, 0.6f, 0.9f, 1.0f));
 
 	m_pTextureParam = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"ImageTexture"));
-	//m_pTextureParam->SetParameterData(&m_firstPassTarget->m_iResourceSRV);
+	// multithreading enabled, so set once is enough
+	m_pTextureParam->InitializeParameterData(&m_firstPassTarget->m_iResourceSRV);
 }
 
 
@@ -81,8 +82,6 @@ void TwoPassRenderer::ExecuteTask(PipelineManagerDX11* pPipelineManager, IParame
 		// Set this view's render parameters
 		SetRenderParams(pParamManager);
 
-		pPipelineManager->ClearPipelineResources();
-
 		// Run through the graph and render each of the entities
 		m_pScene->GetRoot()->Render(pPipelineManager, pParamManager, VT_FINALPASS);
 
@@ -93,7 +92,9 @@ void TwoPassRenderer::SetRenderParams(IParameterManager* pParamManager)
 {
 	SceneRenderTask::SetRenderParams(pParamManager);
 
-	pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
+	// set parameters here if its not set in constructor
+	// both methods work
+	//pParamManager->SetShaderResourceParameter(m_pTextureParam, m_firstPassTarget);
 	//m_pTextureParam->InitializeParameterData(&m_firstPassTarget->m_iResourceSRV);
 }
 

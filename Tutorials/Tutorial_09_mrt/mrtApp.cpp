@@ -1,4 +1,5 @@
-#include "TaskApp.h"
+#include "mrtApp.h"
+
 #include "Log.h"
 
 #include "EventManager.h"
@@ -15,24 +16,17 @@
 #include "DepthStencilViewConfigDX11.h"
 #include "ShaderResourceViewConfigDX11.h"
 #include "SamplerStateConfigDX11.h"
-
-#include "TwoPassRenderer.h"
+#include "mrtRenderer.h"
 
 using namespace Glyph3;
 
-TaskApp AppInstance;
+mrtApp AppInstance;
 
-TaskApp::TaskApp()
-{
-}
+mrtApp::mrtApp() {}
 
+mrtApp::~mrtApp() {}
 
-TaskApp::~TaskApp()
-{
-}
-
-
-bool TaskApp::ConfigureEngineComponents()
+bool mrtApp::ConfigureEngineComponents()
 {
 	if (!ConfigureRenderingEngineComponents(800, 480, D3D_FEATURE_LEVEL_11_0)) {
 		return(false);
@@ -45,13 +39,13 @@ bool TaskApp::ConfigureEngineComponents()
 	return(true);
 }
 
-bool TaskApp::ConfigureRenderingSetup()
+bool mrtApp::ConfigureRenderingSetup()
 {
 	// Create the camera, and the render view that will produce an image of the 
 	// from the camera's point of view of the scene.
 
-	TwoPassRenderer* pTwoPassView = new TwoPassRenderer(*m_pRenderer11, m_BackBuffer);
-	m_pRenderView = pTwoPassView;
+	m_pMainRenderer = new mrtRenderer(*m_pRenderer11, m_BackBuffer);
+	m_pRenderView = m_pMainRenderer;
 
 	m_pTextOverlayView = new ViewTextOverlay(*m_pRenderer11, m_BackBuffer);
 
@@ -71,13 +65,40 @@ bool TaskApp::ConfigureRenderingSetup()
 	return(true);
 }
 
-void TaskApp::ShutdownEngineComponents()
+bool mrtApp::HandleEvent(EventPtr pEvent)
+{
+	eEVENT e = pEvent->GetEventType();
+	if (e == SYSTEM_KEYBOARD_KEYDOWN)
+	{
+		EvtKeyDownPtr pKeyDown = std::static_pointer_cast<EvtKeyDown>(pEvent);
+
+		unsigned int key = pKeyDown->GetCharacterCode();
+
+		if (key == DisplayMode::Key)
+		{
+			DisplayMode::Increment();
+			return true;
+		}
+	}
+	else if (e == SYSTEM_KEYBOARD_KEYUP)
+	{
+		EvtKeyUpPtr pKeyUp = std::static_pointer_cast<EvtKeyUp>(pEvent);
+
+		unsigned int key = pKeyUp->GetCharacterCode();
+	}
+
+	// Call the parent class's event handler if we haven't handled the event.
+
+	return(RenderApplication::HandleEvent(pEvent));
+}
+
+void mrtApp::ShutdownEngineComponents()
 {
 	ShutdownRenderingSetup();
 	ShutdownRenderingEngineComponents();
 }
 
-void TaskApp::Shutdown()
+void mrtApp::Shutdown()
 {
 	// Print the framerate out for the log before shutting down.
 
@@ -86,12 +107,12 @@ void TaskApp::Shutdown()
 	Log::Get().Write(out.str());
 }
 
-std::wstring TaskApp::GetName()
+std::wstring mrtApp::GetName()
 {
-	return(std::wstring(L"subclassTask"));
+	return(std::wstring(L"MultipleRenderTarget"));
 }
 
-void TaskApp::Update()
+void mrtApp::Update()
 {
 	// Update the timer to determine the elapsed time since last frame.  This can
 	// then used for animation during the frame.
@@ -112,39 +133,42 @@ void TaskApp::Update()
 	m_pRenderer11->Present(m_pWindow->GetHandle(), m_pWindow->GetSwapChain());
 }
 
-void TaskApp::Initialize()
+void mrtApp::Initialize()
 {
 	m_Texture = m_pRenderer11->LoadTexture(L"Outcrop.png");
 
-	m_pEffect01 = new RenderEffectDX11();
-	m_pEffect01->SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
-		std::wstring(L"Tutorial07.hlsl"),
+	m_pEffect = new RenderEffectDX11();
+	m_pEffect->SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
+		std::wstring(L"Tutorial09.hlsl"),
 		std::wstring(L"VSMAIN"),
 		std::wstring(L"vs_5_0")));
 
-	m_pEffect01->SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
-		std::wstring(L"Tutorial07.hlsl"),
+	m_pEffect->SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
+		std::wstring(L"Tutorial09.hlsl"),
 		std::wstring(L"PSMAIN"),
 		std::wstring(L"ps_5_0")));
-
-	m_pEffect02 = new RenderEffectDX11();
-	m_pEffect02->SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
-		std::wstring(L"Tutorial07.hlsl"),
+	m_pFinalEffect = new RenderEffectDX11();
+	m_pFinalEffect->SetVertexShader(m_pRenderer11->LoadShader(VERTEX_SHADER,
+		std::wstring(L"Tutorial09.hlsl"),
 		std::wstring(L"VSMAIN"),
 		std::wstring(L"vs_5_0")));
 
-	m_pEffect02->SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
-		std::wstring(L"Tutorial07.hlsl"),
+	m_pFinalEffect->SetPixelShader(m_pRenderer11->LoadShader(PIXEL_SHADER,
+		std::wstring(L"Tutorial09.hlsl"),
 		std::wstring(L"PSFINAL"),
 		std::wstring(L"ps_5_0")));
 
 	SamplerStateConfigDX11 SamplerConfig;
 	m_iSample = RendererDX11::Get()->CreateSamplerState(&SamplerConfig);
-	// following is one way to set shader parameter
-	SamplerParameterDX11* pSamplerParameter =
-		RendererDX11::Get()->m_pParamMgr->GetSamplerStateParameterRef(std::wstring(L"LinearSampler"));
-	pSamplerParameter->InitializeParameterData(&m_iSample);
+	
+	MaterialPtr pMaterial = MaterialPtr(new MaterialDX11());
+	pMaterial->Params[VT_PERSPECTIVE].bRender = true;
+	pMaterial->Params[VT_PERSPECTIVE].pEffect = m_pEffect;
+	pMaterial->Params[VT_FINALPASS].bRender = true;
+	pMaterial->Params[VT_FINALPASS].pEffect = m_pFinalEffect;
 
+	pMaterial->Parameters.SetSamplerParameter(L"LinearSampler", m_iSample);
+	pMaterial->Parameters.SetShaderResourceParameter(L"SampleTexture", m_Texture);
 
 	// Create a full screen quad for rendering the texture to the backbuffer.
 	m_pFullScreen = GeometryPtr(new GeometryDX11());
@@ -153,23 +177,9 @@ void TaskApp::Initialize()
 	//m_pFullScreen->GenerateInputLayout(m_pEffect->GetVertexShader());
 	m_pFullScreen->LoadToBuffers();
 
-	MaterialPtr pMaterial = MaterialPtr(new MaterialDX11());
-
-	pMaterial->Params[VT_PERSPECTIVE].bRender = true;
-	pMaterial->Params[VT_PERSPECTIVE].pEffect = m_pEffect01;
-	pMaterial->Params[VT_FINALPASS].bRender = true;
-	pMaterial->Params[VT_FINALPASS].pEffect = m_pEffect02;
-
-	//pMaterial->Parameters.SetSamplerParameter(L"LinearSampler", m_iSample);
-
-	// set the texture parameters
-	//pMaterial->Parameters.SetShaderResourceParameter(L"InputMap", m_Texture);
-
 	m_pActor = new Actor();
 	m_pActor->GetBody()->Visual.SetGeometry(m_pFullScreen);
 	m_pActor->GetBody()->Visual.SetMaterial(pMaterial);
 	m_pScene->AddActor(m_pActor);
 
-	m_pInputParameter = m_pRenderer11->m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"SampleTexture"));
-	m_pInputParameter->InitializeParameterData(&m_Texture->m_iResourceSRV);
 }
